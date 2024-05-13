@@ -13,10 +13,12 @@ public class CategoryController {
 
     private final CategoryService categoryService;
     public CategoryController(final CategoryService categoryService) {
+
         this.categoryService = categoryService;
     }
     @GetMapping()
     public String getAllCategories() {
+
         return "Getting All Categories";
     }
     @GetMapping("/{catagoriesId}")

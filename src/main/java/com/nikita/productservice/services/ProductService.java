@@ -1,20 +1,25 @@
 package com.nikita.productservice.services;
 
 import com.nikita.productservice.dto.ProductDto;
-import org.springframework.web.bind.annotation.*;
+import com.nikita.productservice.models.Product;
+
+import java.util.List;
 
 public interface ProductService {
-    String getAllProduct();
+    List<Product> getAllProduct();
 
 
-    String getSingleProduct(Long productId);
+    Product getSingleProduct(Long productId);
 
 
-    String addNewProduct(ProductDto productDto);
+    Product addNewProduct(ProductDto product);
 
 
-    String updateProduct(Long productId);
 
 
-    String deleteProduct(Long productId);
+    Product updateProduct(Long productId,Product product);
+
+
+    boolean deleteProduct(Long productId);
+
 }

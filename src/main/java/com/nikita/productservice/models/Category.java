@@ -1,8 +1,14 @@
 package com.nikita.productservice.models;
 
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Categary extends BaseModel{
+import java.util.List;
+@Getter
+@Setter
+
+
+public class Category extends BaseModel{
     private String name;
     private String description;
     private List<Product> products;
