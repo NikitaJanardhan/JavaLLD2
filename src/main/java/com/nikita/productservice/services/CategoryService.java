@@ -1,10 +1,11 @@
 package com.nikita.productservice.services;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.nikita.productservice.models.Category;
+
+import java.util.List;
 
 public interface CategoryService {
-    String getAllCategories();
+    List<Category> getAllCategories();
 
 
     String getProductInCategory(Long catagoriesId);

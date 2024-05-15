@@ -4,12 +4,14 @@ import com.nikita.productservice.dto.ProductDto;
 import com.nikita.productservice.models.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
     List<Product> getAllProduct();
 
 
-    Product getSingleProduct(Long productId);
+    Optional<Product>getSingleProduct(Long productId);
+
 
 
     Product addNewProduct(ProductDto product);
@@ -19,6 +21,8 @@ public interface ProductService {
 
     Product updateProduct(Long productId,Product product);
 
+
+    Product ReplaceProduct(Long productId, Product product);
 
     boolean deleteProduct(Long productId);
 
