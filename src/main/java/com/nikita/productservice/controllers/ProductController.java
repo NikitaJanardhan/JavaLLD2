@@ -5,6 +5,7 @@ import com.nikita.productservice.dto.ProductDto;
 import com.nikita.productservice.exceptions.NotFoundException;
 import com.nikita.productservice.models.Category;
 import com.nikita.productservice.models.Product;
+import com.nikita.productservice.repositiories.ProductRepository;
 import com.nikita.productservice.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,9 @@ import java.util.Optional;
 
 public class ProductController {
     private final ProductService productService;
-    public ProductController(ProductService productService) {
-
+    private ProductRepository productRepository;
+    public ProductController(ProductService productService,ProductRepository productRepository) {
+        this.productRepository=productRepository;
         this.productService = productService;
     }
     @GetMapping("/products")
@@ -56,7 +58,17 @@ public class ProductController {
     }
     @PostMapping("/products")
     public ResponseEntity<Product> addNewProduct(@RequestBody ProductDto product){
-        Product newProduct=productService.addNewProduct(product);
+        //Product newProduct=productService.addNewProduct(product);
+
+        Product newProduct=new Product();
+        newProduct.setDescription(product.getDescription());
+        newProduct.setImageUrl(product.getImage());
+        newProduct.setTitle(product.getTitle());
+        newProduct.setPrice(product.getPrice());
+        newProduct=productRepository.save(newProduct);
+
+
+
         ResponseEntity<Product> response=new ResponseEntity<>(
                 newProduct,HttpStatus.OK
 
