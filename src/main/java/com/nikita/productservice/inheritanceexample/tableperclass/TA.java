@@ -1,4 +1,4 @@
-package com.nikita.productservice.inheritanceexample;
+package com.nikita.productservice.inheritanceexample.tableperclass;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @Entity(name = "tpc_ta")
 
-public class TA extends User{
+public class TA extends User {
     private double averageRating;
 }

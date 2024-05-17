@@ -1,4 +1,4 @@
-package com.nikita.productservice.inheritanceexample;
+package com.nikita.productservice.inheritanceexample.tableperclass;
 
 import jakarta.persistence.Entity;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity(name = "tpc_mentor")
 
-public class Mentor extends User{
+public class Mentor extends User {
     private int noOfSessions;
     private int noOfMenties;
 }

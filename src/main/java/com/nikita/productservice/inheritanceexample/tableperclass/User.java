@@ -1,4 +1,4 @@
-package com.nikita.productservice.inheritanceexample;
+package com.nikita.productservice.inheritanceexample.tableperclass;
 
 import jakarta.persistence.*;
 import lombok.Getter;
