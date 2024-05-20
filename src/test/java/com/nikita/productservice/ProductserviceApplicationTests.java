@@ -12,15 +12,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ProductserviceApplicationTests {
 //    @Autowired
-//    //private JTUserRepository UserRepository;
+//    private JTUserRepository UserRepository;
 //    @Autowired
 //    private JTMentorrepository MentorRepository;
 
     @Test
     void contextLoads() {
     }
-    @Test
-    void testDifferentInheritance() {
+    //@Test
+    //void testDifferentInheritance() {
 //        User user=new User();
 //        user.setEmail("nikita@scaler.com");
 //        user.setPassword("Password");
@@ -36,4 +36,4 @@ class ProductserviceApplicationTests {
     }
 
 
-}
+
