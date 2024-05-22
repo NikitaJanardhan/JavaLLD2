@@ -21,6 +21,7 @@ import java.util.Set;
 public class Category extends BaseModel{
     private String name;
     private String description;
+    //private Dummy dummy;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "category",cascade = {CascadeType.REMOVE})
     @Fetch(FetchMode.SELECT)
     //@BatchSize(size = 1)

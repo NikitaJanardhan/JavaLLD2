@@ -3,6 +3,7 @@ package com.nikita.productservice;
 import com.nikita.productservice.models.Category;
 import com.nikita.productservice.models.Product;
 import com.nikita.productservice.repositiories.CategoryRepository;
+import com.nikita.productservice.repositiories.ProductDBDTo;
 import com.nikita.productservice.repositiories.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,5 +117,10 @@ public class ProductTest {
         for (Product product : category.getProducts()) {
             System.out.println(product.getPrice());
         }
+    }
+    @Test
+    public void demonstrateCustomQueries() {
+        List<ProductDBDTo> productDBDTos = productRepository.laaoProductsWithId(303L);
+        List<Product> products = productRepository.getByIdAndTitle(1L, "hi");
     }
 }
