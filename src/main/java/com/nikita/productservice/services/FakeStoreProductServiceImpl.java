@@ -6,6 +6,7 @@ import com.nikita.productservice.dto.ProductDto;
 import com.nikita.productservice.models.Category;
 import com.nikita.productservice.models.Product;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -20,7 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service(value = "FakeStoreProductService")
+@Primary
 
 
 public class FakeStoreProductServiceImpl implements ProductService {

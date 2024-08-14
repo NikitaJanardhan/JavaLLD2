@@ -1,5 +1,9 @@
 package com.nikita.productservice.controllers;
 
+import com.nikita.productservice.client.authanticationclient.AuthanticationClient;
+import com.nikita.productservice.client.authanticationclient.dto.Role;
+import com.nikita.productservice.client.authanticationclient.dto.SessionStatus;
+import com.nikita.productservice.client.authanticationclient.dto.ValidatetokenResponseDto;
 import com.nikita.productservice.dto.ErrorResponceDto;
 import com.nikita.productservice.dto.ProductDto;
 import com.nikita.productservice.exceptions.NotFoundException;
@@ -7,8 +11,10 @@ import com.nikita.productservice.models.Category;
 import com.nikita.productservice.models.Product;
 import com.nikita.productservice.repositiories.ProductRepository;
 import com.nikita.productservice.services.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
@@ -16,19 +22,47 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
+
 @RestController
+//@RequestMapping("/products")
 
 public class ProductController {
-    private final ProductService productService;
+    private ProductService productService;
     private ProductRepository productRepository;
-    public ProductController(ProductService productService,ProductRepository productRepository) {
+    private AuthanticationClient authanticationClient;
+    public ProductController(ProductService productService,ProductRepository productRepository,
+                             AuthanticationClient authanticationClient){
         this.productRepository=productRepository;
         this.productService = productService;
+        this.authanticationClient=authanticationClient;
     }
     @GetMapping("/products")
 
-    public List<Product> getAllProduct(){
-        return productService.getAllProduct();
+    public ResponseEntity<List<Product>>getAllProduct(@Nullable @RequestHeader("AUTH_TOKEN") String token,
+                                                      @Nullable @RequestHeader("user_id") Long userId){
+        if (token==null|| userId==null){
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+            ValidatetokenResponseDto response=authanticationClient.validate(token,userId);
+
+            if(response.getSessionStatus().equals(SessionStatus.INVALID)){
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+
+            boolean isUserAdmin = false;
+        for (Role role: response.getUserDto().getRoles()) {
+            if (role.getName().equals("ADMIN")) {
+                isUserAdmin = true;
+            }
+        }
+
+        if (!isUserAdmin) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+
+       List<Product>products=productService.getAllProduct();
+        return new ResponseEntity<>(products,HttpStatus.OK);
 
     }
     @GetMapping("/products/{productId}")

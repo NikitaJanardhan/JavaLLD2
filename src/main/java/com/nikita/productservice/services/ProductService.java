@@ -1,6 +1,7 @@
 package com.nikita.productservice.services;
 
 import com.nikita.productservice.dto.ProductDto;
+import com.nikita.productservice.exceptions.NotFoundException;
 import com.nikita.productservice.models.Product;
 
 import java.util.List;
@@ -10,7 +11,9 @@ public interface ProductService {
     List<Product> getAllProduct();
 
 
-    Optional<Product>getSingleProduct(Long productId);
+
+    Optional<Product>getSingleProduct(Long productId) throws NotFoundException;
+    
 
 
 

@@ -2,9 +2,11 @@ package com.nikita.productservice.services;
 
 import com.nikita.productservice.dto.ProductDto;
 import com.nikita.productservice.models.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+@Service(value = "SelfProductService")
 
 public class SelfProductService implements ProductService {
     @Override
